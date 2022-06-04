@@ -17,7 +17,7 @@ object MapDirection extends Enumeration {
       throw new IllegalStateException("Unexpected value")
   }
 
-  def toUnitVector: Vector2d = this match {
+  def toUnitVector(that: MapDirection): Vector2d = that match {
     case EAST =>
       new Vector2d(1, 0)
     case WEST =>
