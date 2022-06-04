@@ -66,8 +66,10 @@ class BattleField(){
   }
 
   def executeStep(move: Move, from: Int, to: Int): Unit ={
+    var pawn: Pawn = pawns(move.moves(from))
     pawns.remove(move.moves(from))
-    pawns.addOne(move.moves(to): Vector2d,new Pawn(move.isWhite,move.moves(to)))
+//    pawns.addOne(move.moves(to): Vector2d,new Pawn(move.isWhite,move.moves(to)))
+    pawns.addOne(move.moves(to): Vector2d,pawn)
   }
 
 
