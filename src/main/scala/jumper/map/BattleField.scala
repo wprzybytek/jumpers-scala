@@ -66,6 +66,10 @@ class BattleField(){
   }
 
   def executeStep(move: Move, from: Int, to: Int): Unit ={
+    if (pawns.getOrElse(move.moves(from), null) == null){
+      println("Error - wrong starting position - no pawn here")
+      return
+    }
     var pawn: Pawn = pawns(move.moves(from))
     pawns.remove(move.moves(from))
 //    pawns.addOne(move.moves(to): Vector2d,new Pawn(move.isWhite,move.moves(to)))
@@ -86,5 +90,29 @@ class BattleField(){
       }
       println()
     }
+  }
+
+  def checkIfSomeoneWon: String = {
+    var winner: String = "white"
+    for (i <- 0 until 8) {
+      if (pawns.getOrElse(new Vector2d(i,7), null) != null) {
+        if (!pawns(new Vector2d(i,7)).isWhite) {
+          winner = ""
+        }
+      }
+      else winner = ""
+    }
+
+    if (winner == "white") return winner
+
+    winner = "black"
+    for (i <- 0 until 8) {
+      if (pawns.getOrElse(new Vector2d(i,0), null) != null) {
+        if (pawns(new Vector2d(i,0)).isWhite) {winner = ""}
+      }
+      else winner = ""
+    }
+
+    return winner
   }
 }
