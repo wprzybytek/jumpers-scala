@@ -1,4 +1,4 @@
-//package jumper.gui
+//package jumper.guiold
 //
 //import javafx.application.Application
 //import javafx.geometry.HPos
@@ -21,13 +21,13 @@
 //
 //
 //class App extends Application {
-//  private[gui] var window = null
-//  private[gui] var scene = null
-//  private[gui] val gridpane = new GridPane
-//  private[gui] val button = new Button("Make a move")
-//  private[gui] val label = new Label("Player White begins...")
-//  private[gui] var whitePawn = null
-//  private[gui] var blackPawn = null
+//  private[guiold] var window = null
+//  private[guiold] var scene = null
+//  private[guiold] val gridpane = new GridPane
+//  private[guiold] val button = new Button("Make a move")
+//  private[guiold] val label = new Label("Player White begins...")
+//  private[guiold] var whitePawn = null
+//  private[guiold] var blackPawn = null
 //
 //  def setLabel(text: String): Unit = {
 //    this.label.setText(text)
@@ -51,7 +51,7 @@
 //    for (y <- 0 until battleField.mapHeight) {
 //      for (x <- 0 until battleField.mapWeight) {
 //        if (battleField.getPawnsOfP1.get(new Vector2d(x, y)) != null) {
-//          val Box = new GuiElementBox(whitePawn)
+//          val Box = new GuiElementBoxOld(whitePawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {
@@ -63,7 +63,7 @@
 //          pane.add(box, x, y)
 //        }
 //        if (battleField.getPawnsOfP2.get(new Vector2d(x, y)) != null) {
-//          val Box = new GuiElementBox(blackPawn)
+//          val Box = new GuiElementBoxOld(blackPawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {
@@ -96,7 +96,7 @@
 //    for (y <- 0 until battleField.mapHeight) {
 //      for (x <- 0 until battleField.mapWeight) {
 //        if (battleField.getPawnsOfP1.get(new Vector2d(x, y)) != null) {
-//          val Box = new GuiElementBox(whitePawn)
+//          val Box = new GuiElementBoxOld(whitePawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {
@@ -123,7 +123,7 @@
 //          }
 //        }
 //        if (battleField.getPawnsOfP2.get(new Vector2d(x, y)) != null) {
-//          val Box = new GuiElementBox(blackPawn)
+//          val Box = new GuiElementBoxOld(blackPawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {
@@ -171,7 +171,7 @@
 //    for (y <- 0 until battleField.mapHeight) {
 //      for (x <- 0 until battleField.mapWeight) {
 //        if (battleField.getPawnsOfP1.get(new Vector2d(x, y)) != null) {
-//          val Box = new GuiElementBox(whitePawn)
+//          val Box = new GuiElementBoxOld(whitePawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {
@@ -184,7 +184,7 @@
 //          if (x == whichPawn.x && y == whichPawn.y) box.setBackground(new Background(new BackgroundFill(Color.AZURE, CornerRadii.EMPTY, Insets.EMPTY)))
 //        }
 //        else if (battleField.getPawnsOfP2.get(new Vector2d(x, y)) != null) {
-//          val Box = new GuiElementBox(blackPawn)
+//          val Box = new GuiElementBoxOld(blackPawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {
@@ -252,8 +252,8 @@
 //    for (y <- 0 until battleField.mapHeight) {
 //      for (x <- 0 until battleField.mapWeight) {
 //        if (x + y <= which || (x + y) % 2 == (which / 2) % 2) {
-//          var Box = new GuiElementBox(blackPawn)
-//          if (winner == 1) Box = new GuiElementBox(whitePawn)
+//          var Box = new GuiElementBoxOld(blackPawn)
+//          if (winner == 1) Box = new GuiElementBoxOld(whitePawn)
 //          var box = null
 //          try box = Box.MakeBox
 //          catch {

@@ -1,9 +1,6 @@
 package jumper.map
 
-import javafx.application.Platform
-import javafx.scene.layout.GridPane
-import MapDirection.{MapDirection, NORTH, intToMapDirection, toUnitVector}
-
+import MapDirection._
 import scala.collection.mutable
 import scala.collection.mutable.LinkedHashMap
 
