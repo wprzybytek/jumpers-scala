@@ -10,9 +10,6 @@ class PawnElement(row: Int, column: Int, val pawn: Pawn, checkMove: (Integer, In
 
   children = createImage()
 
-  onMouseClicked = (event) => {
-    println("Clicked %s pawn on row = %d, column = %d".format(if (pawn.isWhite) "white" else "black", row, column))
-  }
 
   def createImage(): ImageView = {
     val srcImg: String = if (pawn.isWhite) "white.png" else "black.png"

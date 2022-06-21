@@ -1,10 +1,8 @@
 package jumper.gui
 
 import jumper.map.{BattleField, Pawn, Vector2d}
-import scalafx.Includes._
-import scalafx.event.ActionEvent
 import scalafx.geometry.Pos
-import scalafx.scene.control.{Button, Label}
+import scalafx.scene.control.Label
 import scalafx.scene.layout.VBox
 
 import scala.collection.mutable
@@ -22,32 +20,30 @@ class GUI() extends VBox {
   var infoText = "Some info text"
   val info = new Label(infoText)
   val board: Board= new Board(pawns, checkMove: (Integer, Integer, Integer, Integer) => Unit)
-  val button = new Button("Click me")
-  button.onAction = onButtonClick
-
-  def onButtonClick(event: ActionEvent): Unit = {
-    println("Clicked a button")
-  }
 
   def checkMove(pawnX: Integer, pawnY: Integer, boardX: Integer, boardY: Integer): Unit = {
-    println(s"pawn row: $pawnX, pawn column: $pawnY, board row: $boardX, board column: $boardY")
-
     var pawn: Pawn = battleField.pawns.getOrElse(new Vector2d(pawnX,pawnY),null)
     if (pawn == null){
-      println("wrong")
+      println("No pawn here")
       return
     }
 
     if (battleField.move.isWhite != pawn.isWhite){
-      println("wrong player")
+      println("Wrong player")
       return
     }
 
     battleField.startMove(pawns.getOrElse(new Vector2d(pawnX,pawnY),null))
-    println(battleField.checkMove(new Vector2d(boardX,boardY)))
+    if (!battleField.checkMove(new Vector2d(boardX,boardY))){
+      println("Wrong move")
+    }
 
     board.drawBoard()
+
+    if (battleField.checkIfSomeoneWon != ""){
+      println(battleField.checkIfSomeoneWon + "won!")
+    }
   }
 
-  children = Array(info, board, button)
+  children = Array(info, board)
 }

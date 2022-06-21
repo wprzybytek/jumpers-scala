@@ -16,9 +16,6 @@ class BoardElement(val row: Int, val column: Int,
 
   this.setBackground(new Background(new BackgroundFill(if ((row+column)%2 == 0) Color.WHITE else Color.LIGHTGRAY, CornerRadii.EMPTY, new Insets(1,1,1,1))))
 
-  onMouseClicked = (event) => {
-    println("Clicked elem on row = %d, column = %d".format( row, column))
-  }
 
   onDragOver = (event) => {
     event.acceptTransferModes(TransferMode.MOVE)

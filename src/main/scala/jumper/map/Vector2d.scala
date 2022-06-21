@@ -3,12 +3,12 @@ package jumper.map
 class Vector2d(val x: Int, val y: Int) {
 
   def precedes(other: Vector2d): Boolean = {
-    if (x < other.x && y < other.y) return true
+    if (x < other.x || y < other.y) return true
     false
   }
 
   def follows(other: Vector2d): Boolean = {
-    if (x > other.x && y > other.y) return true
+    if (x > other.x || y > other.y) return true
     false
   }
 

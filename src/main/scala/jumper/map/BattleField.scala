@@ -21,7 +21,7 @@ class BattleField() {
   def startMove(pawn: Pawn): Boolean = {
     if (move.inMove) return false
     move.currPosition = pawn.currentPosition
-    move.inMove = true
+//    move.inMove = true
     return true
   }
 
@@ -50,6 +50,7 @@ class BattleField() {
           move.to = newPosition
           this.executeStep()
           pawns.remove(currPosition.add(moveDirection))
+          move.inMove = true
           if (!this.areMovesPossible()) this.finishMove()
           return true
         }
