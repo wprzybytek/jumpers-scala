@@ -21,7 +21,7 @@ class GUI() extends VBox {
 
   var infoText = "Some info text"
   val info = new Label(infoText)
-  val board = new Board(pawns, checkMove: (Integer, Integer, Integer, Integer) => Unit)
+  val board: Board= new Board(pawns, checkMove: (Integer, Integer, Integer, Integer) => Unit)
   val button = new Button("Click me")
   button.onAction = onButtonClick
 
@@ -29,8 +29,24 @@ class GUI() extends VBox {
     println("Clicked a button")
   }
 
-  def checkMove(pawnX: Integer, pawnY: Integer, boardX: Integer, boardY: Integer) = {
+  def checkMove(pawnX: Integer, pawnY: Integer, boardX: Integer, boardY: Integer): Unit = {
     println(s"pawn row: $pawnX, pawn column: $pawnY, board row: $boardX, board column: $boardY")
+
+    var pawn: Pawn = battleField.pawns.getOrElse(new Vector2d(pawnX,pawnY),null)
+    if (pawn == null){
+      println("wrong")
+      return
+    }
+
+    if (battleField.move.isWhite != pawn.isWhite){
+      println("wrong player")
+      return
+    }
+
+    battleField.startMove(pawns.getOrElse(new Vector2d(pawnX,pawnY),null))
+    println(battleField.checkMove(new Vector2d(boardX,boardY)))
+
+    board.drawBoard()
   }
 
   children = Array(info, board, button)

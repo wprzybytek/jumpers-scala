@@ -2,43 +2,43 @@ package jumper.map
 
 object MapDirection extends Enumeration {
   type MapDirection = Value
-  val NORTH, EAST, SOUTH, WEST = Value
+  val NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST = Value
 
   def next: MapDirection = this match {
-    case NORTH =>
-      EAST
-    case EAST =>
-      SOUTH
-    case SOUTH =>
-      WEST
-    case WEST =>
-      NORTH
+    case NORTHEAST =>
+      SOUTHEAST
+    case SOUTHEAST =>
+      SOUTHWEST
+    case SOUTHWEST =>
+      NORTHWEST
+    case NORTHWEST =>
+      NORTHEAST
     case _ =>
       throw new IllegalStateException("Unexpected value")
   }
 
   def toUnitVector(that: MapDirection): Vector2d = that match {
-    case EAST =>
-      new Vector2d(1, 0)
-    case WEST =>
-      new Vector2d(-1, 0)
-    case NORTH =>
-      new Vector2d(0, 1)
-    case SOUTH =>
-      new Vector2d(0, -1)
+    case NORTHEAST =>
+      new Vector2d(-1,1)
+    case SOUTHEAST =>
+      new Vector2d(1, 1)
+    case SOUTHWEST =>
+      new Vector2d(1,-1)
+    case NORTHWEST =>
+      new Vector2d(-1, -1)
     case _ =>
       new Vector2d(0, 0)
   }
 
   def intToMapDirection(that: Int): MapDirection = that match {
     case 0 =>
-      NORTH
+      NORTHEAST
     case 1 =>
-      EAST
+      SOUTHEAST
     case 2 =>
-      SOUTH
+      SOUTHWEST
     case 3 =>
-      WEST
+      NORTHWEST
     case _ =>
       throw new IllegalStateException("Unexpected value: " + that)
   }
