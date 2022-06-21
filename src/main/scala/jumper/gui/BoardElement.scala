@@ -1,21 +1,21 @@
-//package jumper.gui
-//
-//import scalafx.geometry.Pos
-//import scalafx.scene.image.ImageView
-//import scalafx.scene.layout.VBox
-//
-//class BoardElement(val row: Int, val column: Int) extends VBox{
-//
-//  alignment = Pos.Center
-//  children = createImage()
-//
-//  def createImage(): ImageView = {
-//    val srcImg: String = if (pawn.isWhite) "white.png" else "black.png"
-//    val image = new ImageView(srcImg)
-//    image.setFitWidth(50)
-//    image.setFitHeight(50)
-//    image
-//  }
-//
-//
-//}
+package jumper.gui
+
+import javafx.scene.layout.{Background, BackgroundFill}
+import javafx.scene.paint.Color
+import javafx.geometry.Insets
+import javafx.scene.layout.CornerRadii
+import scalafx.geometry.Pos
+import scalafx.scene.layout.VBox
+
+class BoardElement(val row: Int, val column: Int) extends VBox{
+
+  alignment = Pos.Center
+
+  this.setBackground(new Background(new BackgroundFill(if ((row+column)%2 == 0) Color.WHITE else Color.LIGHTGRAY, CornerRadii.EMPTY, new Insets(1,1,1,1))))
+
+  onMouseClicked = (event) => {
+    println("Clicked elem on row = %d, column = %d".format( row, column))
+  }
+
+
+}

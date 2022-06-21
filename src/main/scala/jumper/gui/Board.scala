@@ -26,8 +26,16 @@ class Board(var pawns: mutable.LinkedHashMap[Vector2d, Pawn]) extends GridPane {
   }
 
   def addPawnsToBoard(): Unit = {
-    for ((position, pawn) <- this.pawns) {
-      this.add(new PawnElement(position.x, position.y,pawn), position.y, position.x)
-    }
+    for (y <- 0 until rows)
+      for (x <- 0 until columns) {
+          var pawn: Pawn = pawns.getOrElse(new Vector2d(x, y), null)
+          pawn match {
+            case _: Pawn => this.add(new PawnElement(x, y,pawn), y,x)
+            case _ => this.add(new BoardElement(x, y),y,x)
+          }
+      }
+
+
   }
+
 }
