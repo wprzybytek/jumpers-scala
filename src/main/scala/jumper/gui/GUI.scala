@@ -21,12 +21,16 @@ class GUI() extends VBox {
 
   var infoText = "Some info text"
   val info = new Label(infoText)
-  val board = new Board(pawns)
+  val board = new Board(pawns, checkMove: (Integer, Integer, Integer, Integer) => Unit)
   val button = new Button("Click me")
   button.onAction = onButtonClick
 
   def onButtonClick(event: ActionEvent): Unit = {
     println("Clicked a button")
+  }
+
+  def checkMove(pawnX: Integer, pawnY: Integer, boardX: Integer, boardY: Integer) = {
+    println(s"pawn row: $pawnX, pawn column: $pawnY, board row: $boardX, board column: $boardY")
   }
 
   children = Array(info, board, button)
