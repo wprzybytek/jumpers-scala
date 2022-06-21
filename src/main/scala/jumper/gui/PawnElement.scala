@@ -10,7 +10,6 @@ class PawnElement(row: Int, column: Int, val pawn: Pawn, checkMove: (Integer, In
 
   children = createImage()
 
-
   def createImage(): ImageView = {
     val srcImg: String = if (pawn.isWhite) "white.png" else "black.png"
     val image = new ImageView(srcImg)
@@ -19,9 +18,8 @@ class PawnElement(row: Int, column: Int, val pawn: Pawn, checkMove: (Integer, In
     image
   }
 
-  onDragDetected = (event) => {
+  onDragDetected = _ => {
     val dragBoard: Dragboard = this.startDragAndDrop(TransferMode.MOVE)
-
     val content: ClipboardContent = new ClipboardContent()
     content.putString(s"$row $column")
     dragBoard.setContent(content)

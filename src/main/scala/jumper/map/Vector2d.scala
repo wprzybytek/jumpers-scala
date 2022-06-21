@@ -1,6 +1,6 @@
 package jumper.map
 
-class Vector2d(val x: Int, val y: Int) {
+case class Vector2d(x: Int, y: Int) {
 
   def precedes(other: Vector2d): Boolean = {
     if (x < other.x || y < other.y) return true
@@ -16,21 +16,4 @@ class Vector2d(val x: Int, val y: Int) {
     val result = new Vector2d(x + other.x, y + other.y)
     result
   }
-
-  def canEqual(other: Any): Boolean = other.isInstanceOf[Vector2d]
-
-  override def equals(other: Any): Boolean = other match {
-    case that: Vector2d =>
-      (that canEqual this) &&
-        x == that.x &&
-        y == that.y
-    case _ => false
-  }
-
-  override def hashCode(): Int = {
-    val state = Seq(x, y)
-    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
-  }
-
-  override def toString: String = "(" + x + "," + y + ")"
 }

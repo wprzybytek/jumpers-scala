@@ -19,15 +19,15 @@ object MapDirection extends Enumeration {
 
   def toUnitVector(that: MapDirection): Vector2d = that match {
     case NORTHEAST =>
-      new Vector2d(-1,1)
+      Vector2d(-1, 1)
     case SOUTHEAST =>
-      new Vector2d(1, 1)
+      Vector2d(1, 1)
     case SOUTHWEST =>
-      new Vector2d(1,-1)
+      Vector2d(1, -1)
     case NORTHWEST =>
-      new Vector2d(-1, -1)
+      Vector2d(-1, -1)
     case _ =>
-      new Vector2d(0, 0)
+      Vector2d(0, 0)
   }
 
   def intToMapDirection(that: Int): MapDirection = that match {

@@ -1,4 +1,4 @@
 package jumper.map
 
-class Pawn(val isWhite: Boolean, var currentPosition: Vector2d, val battleField: BattleField) {
+case class Pawn(isWhite: Boolean, var currentPosition: Vector2d, battleField: BattleField) {
 }

@@ -10,29 +10,26 @@ import scalafx.scene.layout.VBox
 
 class BoardElement(val row: Int, val column: Int,
                    checkMove: (Integer, Integer, Integer, Integer) => Unit)
-  extends VBox{
+  extends VBox {
 
   alignment = Pos.Center
 
-  this.setBackground(new Background(new BackgroundFill(if ((row+column)%2 == 0) Color.WHITE else Color.LIGHTGRAY, CornerRadii.EMPTY, new Insets(1,1,1,1))))
+  this.setBackground(
+    new Background
+    (new BackgroundFill(
+      if ((row + column) % 2 == 0) Color.WHITE
+      else Color.LIGHTGRAY, CornerRadii.EMPTY, new Insets(1, 1, 1, 1))))
 
-
-  onDragOver = (event) => {
+  onDragOver = event => {
     event.acceptTransferModes(TransferMode.MOVE)
   }
 
-  onDragDropped = (event) => {
+  onDragDropped = event => {
     val dragBoard: Dragboard = event.getDragboard
     if (dragBoard.hasString) {
       val x = dragBoard.getString.charAt(0) - '0'
       val y = dragBoard.getString.charAt(2) - '0'
       checkMove(x, y, row, column)
     }
-    else {
-      println("nie dziala")
-    }
   }
-
-
-
 }

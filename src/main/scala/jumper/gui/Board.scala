@@ -20,8 +20,8 @@ class Board(var pawns: mutable.LinkedHashMap[Vector2d, Pawn],
 
   def drawBoard(): Unit = {
     this.gridLinesVisible = false
-    this.columnConstraints = for (i <- 0 until rows) yield new ColumnConstraints(fieldSize)
-    this.rowConstraints = for (i <- 0 until columns) yield new RowConstraints(fieldSize)
+    this.columnConstraints = for (_ <- 0 until rows) yield new ColumnConstraints(fieldSize)
+    this.rowConstraints = for (_ <- 0 until columns) yield new RowConstraints(fieldSize)
     this.children = Array()
     this.gridLinesVisible = true
 
@@ -31,16 +31,13 @@ class Board(var pawns: mutable.LinkedHashMap[Vector2d, Pawn],
   def addPawnsToBoard(): Unit = {
     for (y <- 0 until rows)
       for (x <- 0 until columns) {
-          var pawn: Pawn = pawns.getOrElse(new Vector2d(x, y), null)
-          pawn match {
-            case _: Pawn => this.add(new PawnElement(x, y, pawn, checkMove: (Integer, Integer, Integer, Integer) => Unit), y,x)
-            case _ => this.add(new BoardElement(x, y,
-              checkMove: (Integer, Integer, Integer, Integer) => Unit),
-              y, x)
-          }
+        val pawn: Pawn = pawns.getOrElse(new Vector2d(x, y), null)
+        pawn match {
+          case _: Pawn => this.add(new PawnElement(x, y, pawn,
+            checkMove: (Integer, Integer, Integer, Integer) => Unit), y, x)
+          case _ => this.add(new BoardElement(x, y,
+            checkMove: (Integer, Integer, Integer, Integer) => Unit), y, x)
+        }
       }
-
-
   }
-
 }
