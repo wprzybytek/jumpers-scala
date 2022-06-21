@@ -1,7 +1,5 @@
 package jumper
 
-import jumper.map.MapDirection.{intToMapDirection, toUnitVector}
-import jumper.map.{BattleField, Move, Vector2d}
 import jumper.gui.GUI
 import scalafx.application.JFXApp3
 import scalafx.scene.Scene

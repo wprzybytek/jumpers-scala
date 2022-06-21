@@ -1,23 +1,32 @@
 package jumper.map
 
-import MapDirection._
+import jumper.map.MapDirection._
+
 import scala.collection.mutable
-import scala.collection.mutable.LinkedHashMap
 
 
 class BattleField(){
   val pawns: mutable.LinkedHashMap[Vector2d, Pawn] = mutable.LinkedHashMap()
+  var move: Move = new Move(new Vector2d(0,0),true)
+  move.inMove = false
 
   def initialize(): Unit = {
     for (i <- 0 until 8) {
       val position1 = new Vector2d(i,0)
-      pawns.put(position1, new Pawn(true, position1))
+      pawns.put(position1, new Pawn(true, position1,this))
       val position2 = new Vector2d(i,7)
-      pawns.put(position2, new Pawn(false, position2))
+      pawns.put(position2, new Pawn(false, position2,this))
     }
   }
 
-  def checkMove(newPosition: Vector2d, move: Move): Boolean = {
+  def startMove(pawn: Pawn): Boolean = {
+    if (move.inMove) return false
+    move = new Move(pawn.currentPosition,pawn.isWhite)
+    move.inMove = true
+    return true
+  }
+
+  def checkMove(newPosition: Vector2d): Boolean = {
     if (newPosition.precedes(new Vector2d(0, 0)) || newPosition.follows(new Vector2d(7, 7))) return false
 
     val currPosition: Vector2d = move.moves.last
@@ -32,7 +41,6 @@ class BattleField(){
           return true
         }
       }
-
 
 
       for (i <- 0 until 4) {
@@ -62,32 +70,37 @@ class BattleField(){
     return false
   }
 
-  def executeStep(move: Move, from: Int, to: Int): Unit ={
+  def finishMove(): Unit = {
+    move.inMove = false
+  }
+
+  def executeStep(from: Int, to: Int): Unit ={
     if (pawns.getOrElse(move.moves(from), null) == null){
       println("Error - wrong starting position - no pawn here")
       return
     }
     var pawn: Pawn = pawns(move.moves(from))
+    pawn.currentPosition = move.moves(to)
     pawns.remove(move.moves(from))
 //    pawns.addOne(move.moves(to): Vector2d,new Pawn(move.isWhite,move.moves(to)))
     pawns.addOne(move.moves(to): Vector2d,pawn)
   }
 
 
-  def visualize(): Unit = {
-    val out: String = ""
-    for (i <- 0 until 8) {
-      for (j <- 0 until 8) {
-//        val some:Option[String] = Some(" _ ")
-        if (pawns.getOrElse(new Vector2d(i,j), null) == null) {print(" _ ")}
-        else {
-          if (pawns(new Vector2d(i,j)).isWhite) print(" W ")
-          else print(" B ")
-        }
-      }
-      println()
-    }
-  }
+//  def visualize(): Unit = {
+//    val out: String = ""
+//    for (i <- 0 until 8) {
+//      for (j <- 0 until 8) {
+////        val some:Option[String] = Some(" _ ")
+//        if (pawns.getOrElse(new Vector2d(i,j), null) == null) {print(" _ ")}
+//        else {
+//          if (pawns(new Vector2d(i,j)).isWhite) print(" W ")
+//          else print(" B ")
+//        }
+//      }
+//      println()
+//    }
+//  }
 
   def checkIfSomeoneWon: String = {
     var winner: String = "white"

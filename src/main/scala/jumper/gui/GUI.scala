@@ -17,7 +17,7 @@ class GUI() extends VBox {
 
   val battleField = new BattleField()
   battleField.initialize()
-  val pawns: mutable.LinkedHashMap[Vector2d, Pawn] = battleField.pawns
+  var pawns: mutable.LinkedHashMap[Vector2d, Pawn] = battleField.pawns
 
   var infoText = "Some info text"
   val info = new Label(infoText)

@@ -6,7 +6,7 @@ import scalafx.scene.layout.{ColumnConstraints, GridPane, RowConstraints}
 
 import scala.collection.mutable
 
-class Board(val pawns: mutable.LinkedHashMap[Vector2d, Pawn]) extends GridPane {
+class Board(var pawns: mutable.LinkedHashMap[Vector2d, Pawn]) extends GridPane {
   val rows = 8
   val columns = 8
   val fieldSize = 55
@@ -27,7 +27,7 @@ class Board(val pawns: mutable.LinkedHashMap[Vector2d, Pawn]) extends GridPane {
 
   def addPawnsToBoard(): Unit = {
     for ((position, pawn) <- this.pawns) {
-      this.add(new PawnElement(pawn.isWhite, position.x, position.y), position.y, position.x)
+      this.add(new PawnElement(position.x, position.y,pawn), position.y, position.x)
     }
   }
 }
